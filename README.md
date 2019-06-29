@@ -8,7 +8,7 @@ Kayla Graham
 Crystal Ophaso (git username: cophaso)
 
 # User Flow
-#+html: <p align="center"><img src="img/user_flow.png" /></p>
+<p align="center"><img src="img/user_flow.png" /></p>
 
 
 
