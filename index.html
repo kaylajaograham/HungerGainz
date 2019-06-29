@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Hunger Gainz App</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Actor|Mitr|Montserrat|Quattrocento+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <h1>Hunger Gainz</h1>
+    </main>
+
+    <section class="cuisineSelection">
+        <h2>What are you craving?</h2>
+        <div id="Japanese" class="cuisineOptions">JAPANESE</div>
+        <div id="American" class="cuisineOptions">AMERICAN</div>
+        <div id="Italian" class="cuisineOptions">ITALIAN</div>
+        <div id="Mexican" class="cuisineOptions">MEXICAN</div>
+        <div id="Korean" class="cuisineOptions">KOREAN</div>
+        <div id="Spanish" class="cuisineOptions">SPANISH</div>
+    </section>
+
+    <section class="inOrOut">
+        <h2>Cooking it yourself?</h2>
+        <div id="stayIn" class="whereToEat">Yes</div>
+        <div id="goOut" class="whereToEat">Absolutely Not</div>
+    </section>
+
+    <input type="submit" class="submit"></input>
+
+    <section id="results" class="hidden">
+        <h2>Results for </h2>
+        <h3>Restaurants Near You</h3>
+        <ul class="rest-results"></ul>
+        <ul class="video-results"></ul>
+    </section>
+
+    <!-- SCRIPTS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
