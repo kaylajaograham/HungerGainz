@@ -2,12 +2,29 @@
 
 "use strict";
 
+var selectionArr = [];
+var inOutFilter = ''
 
 // making div:active stick
+function selectCuisine() {
+  $('.cuisineSelection').on('click', '.cuisineOptions', function(event) {
+      selectionArr.push($(event.target).text());
+      console.log(selectionArr);
+  });
+}
 
-$('.cuisineSelection').click(function(event) {
-    var $target = $(event.target); // the element that fired the original click event
-    if ($target.is('div.click')) {
-        window.location.href = $target.find('a').attr('href');
-    }
-});
+function whereToEat() {
+  $('.inOrOut').on('click', '.whereToEat', function(event) {
+		inOutFilter = $(event.target).text();
+		console.log(inOutFilter);
+  });
+}
+
+function watchForm(){
+  $('form').submit(event => {
+		event.preventDefault();
+	})
+}
+
+$(selectCuisine());
+$(whereToEat());
