@@ -51,10 +51,20 @@ input#zip {
 
 /* FILTER STYLES */
 
-div {
+div.col1 {
+    width: 200px;
+    float: left;
+}
+
+div.col2 {
+    margin-left: 200px;
+}
+
+div.cuisineOptions,
+div.whereToEat {
     border: 1px solid black;
     height: 40px;
-    width: 40%;
+    width: 80%;
     line-height: 150%;
     border-radius: 30px;
     margin-bottom: 10px;
