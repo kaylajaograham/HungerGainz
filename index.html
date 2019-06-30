@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Hunger Gainz App</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Actor|Mitr|Montserrat|Quattrocento+Sans&display=swap" rel="stylesheet">
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
         <h1>Hunger Gainz</h1>
     </main>
 
     <!-- HOME PAGE -->
-    <section class="location">
+    <form>
+      <section class="location">
         <h2>What's your zip code?</h2>
         <input id="zip" name="zipCode" type="type" placeholder="92126" required></input>
-    </section>
+      </section>
 
-    <section class="cuisineSelection">
+      <section class="cuisineSelection">
         <h2>What are you craving?</h2>
+        
         <div class="col1">
             <div id="Japanese" class="cuisineOptions">JAPANESE</div>
             <div id="American" class="cuisineOptions">AMERICAN</div>
@@ -34,29 +35,28 @@
         </div>
     </section>
 
-    <section class="inOrOut">
+      <section class="inOrOut">
         <h2>Where will you eat?</h2>
         <div id="stayIn" class="whereToEat">Cook it myself</div>
         <div id="goOut" class="whereToEat">Dine out</div>
         <div id="showAll" class="whereToEat">Show all options</div>
-    </section>
+      </section>
 
-    <input type="submit" class="submit"></input>
+      <input type="submit" class="submit"></input>
 
-    <!-- RESULTS SECTION -->
-    <section id="results" class="hidden">
+      <!-- RESULTS SECTION -->
+      <section id="results" class="hidden">
         <h2>Results for </h2>
 
         <ul class="rest-results"></ul>
         <ul class="video-results"> </ul>
 
         <input type="reset" class="resetButton">RESET</input>
-    </section>
+      </section>
+    </form>
 
     <!-- SCRIPTS -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
