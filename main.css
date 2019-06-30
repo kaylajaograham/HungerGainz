@@ -65,13 +65,13 @@ div {
 }
 
 .cuisineOptions:hover,
-.cuisineOptions:active {
+.cuisineOptions.active {
     background-color: #5997CD;
     color: white;
 }
 
 .whereToEat:hover,
-.whereToEat:active {
+.whereToEat.active {
     background-color: #DCCB32;
     color: white;
 }
