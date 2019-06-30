@@ -13,10 +13,7 @@ var inOutFilter = ''
 
 function selectCuisine() {
   $('.cuisineSelection').on('click', '.cuisineOptions', function(event) {
-		// the code below doesn't work because it will add values to the array when deselecting
-		// selectionArr.push($(event.target).text());
 		$(event.target).toggleClass('active');
-    // console.log(selectionArr);
   });
 }
 
@@ -40,13 +37,18 @@ function determineSearch(inOrOut){
 	};
 }
 
+function gatherActive(){
+	$('div.cuisineOptions.active').each(function(){
+		selectionArr.push($(this).text());
+	});
+}
+
+
 function watchForm(){
   $('form').submit(event => {
 		event.preventDefault();
 		let zip = $('#zip').val();
-		console.log(zip);
-		// need to loop through all the .whatToEat divs to find the active class
-		// then append there values to the array selectionArr
+		gatherActive();
 		console.log(selectionArr);
 	})
 }
