@@ -5,7 +5,6 @@ const youtubeApiKey = "";
 // zomato API Key
 const zomatoApiKey = "";
 
-
 // youtube search API
 const youtubeSearchUrl = "https://www.googleapis.com/youtube/v3/search";
 // zomato API
@@ -18,6 +17,8 @@ var inOutFilter = '';
 // hero slideshow
 var slideIndex = 0; 
 
+// Hard coded data from the Zomato endpoint. I could have used the GET API endpoint to fetch it
+// since there's only 6 options i decided to hardcode it. The nested api calls were becomeing difficult. 
 var cuisineData = [
   {
     id: 60,
@@ -58,6 +59,7 @@ function carousel() {
   setTimeout(carousel, 2000);
 }
 
+// Calls the youtube search API and gets a list of videos 
 function getYoutubeVideos(searchTerm, maxResults = 5) {
     for (let i = 0; i < searchTerm.length; i++) {
         const params = {
@@ -83,6 +85,7 @@ function getYoutubeVideos(searchTerm, maxResults = 5) {
     }
 }
 
+// Adds html to display the youtube videos that were retrieved in the getYoutubeVideos function
 function displayVidResults(responseJson) {
     for (let i = 0; i < responseJson.items.length; i++) {
         $('.video-results').append(
@@ -98,7 +101,8 @@ function displayVidResults(responseJson) {
     $("#results").removeClass("hidden");
 }
 
-function getCuisineId(searchTerm){
+// Gets the ID of the cuisine that was selected by the user from the hardcoded data object
+function getZomatoCuisineId(searchTerm){
   for (let i = 0; i < cuisineData.length; i++) {
     if(searchTerm == cuisineData[i].cuisine){
       return cuisineData[i].id;
@@ -106,7 +110,9 @@ function getCuisineId(searchTerm){
   }
 }
 
-function getCityId(searchTerm, city){
+// Gets the Zomato city id from the zomato cities API 
+// and then called the getzomato restaraunt function to retrieve the list of restaurants
+function getZomatoCityId(searchTerm, city){
   const options = {
     headers: new Headers({
         'user-key': zomatoApiKey
@@ -129,6 +135,7 @@ function getCityId(searchTerm, city){
       .then(responseJson => getZomatoRest(searchTerm, responseJson.location_suggestions[0].id))
 }
 
+// uses the zomato search api to find restaraunt suggestions then calls the function to display them in html
 function getZomatoRest(searchTerm, city_id, maxResults = 5) {
     for (let i = 0; i < searchTerm.length; i++) {
         const options = {
@@ -140,7 +147,7 @@ function getZomatoRest(searchTerm, city_id, maxResults = 5) {
         const params = {
             entity_id: city_id,
             entity_type: 'city',
-            cuisines: getCuisineId(searchTerm[i]),
+            cuisines: getZomatoCuisineId(searchTerm[i]),
             radius: 16095,
             count: maxResults
         };
@@ -160,6 +167,7 @@ function getZomatoRest(searchTerm, city_id, maxResults = 5) {
     }
 }
 
+// creates html to display the restaraunt recommendations
 function displayRestResults(responseJson) {
     for (let i = 0; i < responseJson.restaurants.length; i++) {
         $('.rest-results').append(`<li>
@@ -171,12 +179,14 @@ function displayRestResults(responseJson) {
     $("#results").removeClass("hidden");
 }
 
+// toggles the selection highlight for the cuisines
 function selectCuisine() {
     $('.cuisineSelection').on('click', '.cuisineOptions', function(event) {
         $(event.target).toggleClass('active');
     });
 }
 
+// toggles the selection highlight for the Staying In or Going Out option
 function whereToEat() {
     $('.inOrOut').on('click', '.whereToEat', function(event) {
         inOutFilter = $(event.target).text();
@@ -184,6 +194,8 @@ function whereToEat() {
     });
 }
 
+// determines which search to use
+// I split them up since if you're going out it doesn't make sense to search through youtube to find recipes
 function determineSearch(searchTerm, inOrOut, city_id) {
     if (inOrOut == 'Home-cook') {
         //use only the youtube endpoint
@@ -191,20 +203,22 @@ function determineSearch(searchTerm, inOrOut, city_id) {
     } else if (inOrOut == 'Show all options') {
         //use the zomato and youtube endpoint
         getYoutubeVideos(searchTerm);
-        getZomatoRest(searchTerm, city_id);
+        getZomatoCityId(searchTerm, city_id);
 
     } else if (inOrOut == 'Dine out') {
         //use only the zomato endpoint
-        getCityId(searchTerm, city_id);
+        getZomatoCityId(searchTerm, city_id);
     };
 }
 
+// this finds all the selected cuisine options and appends them to an array to use later
 function gatherActive() {
     $('div.cuisineOptions.active').each(function() {
         selectionArr.push($(this).text());
     });
 }
 
+// empties the results section, hides results, clears selections
 function reset() {
     $('.resetButton').on('click', function() {
         $('.video-results').empty();
@@ -217,6 +231,7 @@ function reset() {
     })
 }
 
+// watches for the form submit to happen then kicks everything off
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
@@ -226,7 +241,8 @@ function watchForm() {
     })
 }
 
-$(carousel()); //hero carousel
+// all the necessary function calls for functions with event listeners. 
+$(carousel()); 
 $(selectCuisine());
 $(whereToEat());
 $(watchForm());
