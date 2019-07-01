@@ -8,41 +8,113 @@ body {
 }
 
 main {
-    padding: 20px;
-    font-family: 'Mitr', sans-serif;
+    text-align: center;
 }
 
-h1,
-h2 {
-    text-align: center;
-    line-height: 0.75cm;
-    padding: 15px;
+.mySlides {
+    background-size: cover;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    max-height: 420px;
+}
+
+.heroSlideContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 420px;
+    z-index: -1;
+    padding-bottom: 20px;
+}
+
+.heroTitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 900;
+    z-index: 1000;
+    color: black;
+    font-family: 'Kanit', sans-serif;
+}
+
+h1 {
+    padding: 10px;
 }
 
 section {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
-input#zip {
+h2 {
+    text-align: center;
+    color: rgb(36, 177, 146);
+    padding: 25px;
+}
+
+.offset {
+    color: white;
+    font-family: 'Actor', sans-serif;
+    padding: 25px;
+}
+
+h3 {
+    padding-bottom: 25px;
+    text-align: center;
+    font-weight: 900;
+    color: black;
+}
+
+section.location {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(36, 177, 146);
+}
+
+.location h2 {
+    color: white;
+    padding: 15px;
+}
+
+.sectionContainer {
+    display: block;
+    margin-bottom: 20px;
+    font-family: 'Actor', sans-serif;
+}
+
+input#city {
     height: 30px;
     display: flex;
     justify-content: center;
     font-size: 16px;
     text-align: center;
+    border: 1px solid grey;
+}
+
+
+/* HERO SLIDESHOW */
+
+.mySlides {
+    display: none;
 }
 
 
 /* BUTTON STYLES */
 
+input.submit {
+    margin: 20px auto;
+}
+
 .submit {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     height: 40px;
-    border: none;
     color: black;
     cursor: pointer;
     background-color: white;
-    border: 2px solid #2BB67A;
+    border: 2px solid white;
     border-radius: 30px;
     display: flex;
     justify-content: center;
@@ -51,35 +123,57 @@ input#zip {
 
 /* FILTER STYLES */
 
-div {
-    border: 1px solid black;
+div.col1 {
+    width: 50%;
+    float: left;
+}
+
+div.col2 {
+    margin-left: 50%;
+}
+
+div.cuisineOptions,
+div.whereToEat {
+    border: 1px black;
+    box-shadow: inset 0 0 7px 4px rgba(255, 255, 255, .5);
     height: 40px;
-    width: 40%;
+    width: 80%;
     line-height: 150%;
     border-radius: 30px;
-    margin-bottom: 10px;
+    margin: 10px auto;
     height: 40px;
     text-align: center;
     padding: 5px;
     cursor: pointer;
+    background-color: whitesmoke;
+    font-family: 'Actor', sans-serif;
+}
+
+section.cuisineSelection {
+    background-color: rgb(36, 177, 146);
+}
+
+div.whereToEat {
+    border: 1px solid rgb(36, 177, 146);
 }
 
 .cuisineOptions:hover,
 .cuisineOptions.active {
-    background-color: #5997CD;
+    background-color: rgb(180, 180, 180);
     color: white;
 }
 
 .whereToEat:hover,
 .whereToEat.active {
-    background-color: #DCCB32;
+    background-color: rgb(180, 180, 180);
     color: white;
+    border: none;
 }
 
 .submit:hover {
     text-decoration: underline;
-    background-color: #2BB67A;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 
@@ -91,4 +185,96 @@ div {
 
 ul {
     list-style-type: none;
+}
+
+
+/* MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES */
+
+@media (min-width: 600px) {
+    .mySlides {
+        max-height: 510px;
+    }
+    .heroSlideContainer {
+        max-height: 510px;
+    }
+    .heroTitle {
+        font-size: 28px;
+    }
+    div.col1 {
+        width: 50%;
+        float: left;
+    }
+    div.col2 {
+        margin-left: 50%;
+    }
+    div.whereToEat {
+        width: 50%;
+    }
+}
+
+@media (min-width: 800px) {
+    .mySlides {
+        max-height: 800px;
+    }
+    .heroSlideContainer {
+        max-height: 800px;
+    }
+    .heroTitle {
+        font-size: 52px;
+    }
+    .heroTitle.p {
+        font-size: 11px;
+        text-align: center;
+    }
+    h2 {
+        font-size: 38px;
+        padding-bottom: 50px;
+    }
+    h3 {
+        font-size: 32px;
+        width: 50%;
+    }
+    p {
+        font-size: 28px;
+        color: rgb(36, 177, 146);
+        padding-top: 50px;
+    }
+    .offset {
+        padding-bottom: 50px;
+    }
+    section.cuisineSelection {
+        height: 300px;
+    }
+    section.location {
+        margin-bottom: 10px;
+    }
+    div.col1 {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        height: 60px;
+    }
+    div.col2 {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        height: 60px;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    div.cuisineOptions {
+        width: 60%;
+    }
+    div.whereToEat {
+        width: 30%;
+    }
+    div.cuisineOptions {
+        margin: auto 10px;
+    }
+    .submit:hover {
+        text-decoration: underline;
+        background-color: rgb(36, 177, 146);
+        border: 2px solid white;
+        color: white;
+    }
 }
