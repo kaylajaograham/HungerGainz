@@ -15,48 +15,47 @@ var selectionArr = [];
 // variable to store the dining option
 var inOutFilter = '';
 // hero slideshow
-var slideIndex = 0; 
+var slideIndex = 0;
 
 // Hard coded data from the Zomato endpoint. I could have used the GET API endpoint to fetch it
 // since there's only 6 options i decided to hardcode it. The nested api calls were becomeing difficult. 
-var cuisineData = [
-  {
-    id: 60,
-    cuisine: 'JAPANESE'
-  },
-  {
-    id: 1,
-    cuisine: 'AMERICAN'
-  },
-  {
-    id: 55,
-    cuisine: 'ITALIAN'
-  },
-  {
-    id: 73,
-    cuisine: 'MEXICAN'
-  },
-  {
-    id: 67,
-    cuisine: 'KOREAN'
-  },
-  {
-    id: 89,
-    cuisine: 'SPANISH'
-  }
+var cuisineData = [{
+        id: 60,
+        cuisine: 'Japanese'
+    },
+    {
+        id: 1,
+        cuisine: 'American'
+    },
+    {
+        id: 55,
+        cuisine: 'Italian'
+    },
+    {
+        id: 73,
+        cuisine: 'Mexican'
+    },
+    {
+        id: 67,
+        cuisine: 'Korean'
+    },
+    {
+        id: 89,
+        cuisine: 'Spanish'
+    }
 ]
 
 // HERO SLIDESHOW
 function carousel() {
-  let i;
-  let x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > x.length) { slideIndex = 1 }
-  x[slideIndex - 1].style.display = "block";
-  setTimeout(carousel, 2000);
+    let i;
+    let x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) { slideIndex = 1 }
+    x[slideIndex - 1].style.display = "block";
+    setTimeout(carousel, 2000);
 }
 
 // Calls the youtube search API and gets a list of videos 
@@ -91,9 +90,9 @@ function displayVidResults(responseJson) {
         $('.video-results').append(
             `<li>
       <h3>${responseJson.items[i].snippet.title}</h3>
-      <p>${responseJson.items[i].snippet.description}</p>
+      <!-- <p>${responseJson.items[i].snippet.description}</p> -->
       <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}">
-      <img src='${responseJson.items[i].snippet.thumbnails.high.url}'>
+      <img src='${responseJson.items[i].snippet.thumbnails.medium.url}'>
       </a>
       </li>`
         )
@@ -102,37 +101,37 @@ function displayVidResults(responseJson) {
 }
 
 // Gets the ID of the cuisine that was selected by the user from the hardcoded data object
-function getZomatoCuisineId(searchTerm){
-  for (let i = 0; i < cuisineData.length; i++) {
-    if(searchTerm == cuisineData[i].cuisine){
-      return cuisineData[i].id;
+function getZomatoCuisineId(searchTerm) {
+    for (let i = 0; i < cuisineData.length; i++) {
+        if (searchTerm == cuisineData[i].cuisine) {
+            return cuisineData[i].id;
+        }
     }
-  }
 }
 
 // Gets the Zomato city id from the zomato cities API 
 // and then called the getzomato restaraunt function to retrieve the list of restaurants
-function getZomatoCityId(searchTerm, city){
-  const options = {
-    headers: new Headers({
-        'user-key': zomatoApiKey
-    })
-  };
+function getZomatoCityId(searchTerm, city) {
+    const options = {
+        headers: new Headers({
+            'user-key': zomatoApiKey
+        })
+    };
 
-  const params = {
-      q: city
-  };
+    const params = {
+        q: city
+    };
 
-  let queryString = $.param(params);
-  const url = zomatoUrl + '/cities?' +queryString;
+    let queryString = $.param(params);
+    const url = zomatoUrl + '/cities?' + queryString;
 
-  fetch(url, options).then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error(response.statusText);
-      })
-      .then(responseJson => getZomatoRest(searchTerm, responseJson.location_suggestions[0].id))
+    fetch(url, options).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(responseJson => getZomatoRest(searchTerm, responseJson.location_suggestions[0].id))
 }
 
 // uses the zomato search api to find restaraunt suggestions then calls the function to display them in html
@@ -153,7 +152,7 @@ function getZomatoRest(searchTerm, city_id, maxResults = 5) {
         };
 
         let queryString = $.param(params);
-        const url = zomatoUrl + '/search?' +queryString;
+        const url = zomatoUrl + '/search?' + queryString;
 
         fetch(url, options).then(response => {
                 if (response.ok) {
@@ -171,10 +170,10 @@ function getZomatoRest(searchTerm, city_id, maxResults = 5) {
 function displayRestResults(responseJson) {
     for (let i = 0; i < responseJson.restaurants.length; i++) {
         $('.rest-results').append(`<li>
-        <h3>${responseJson.restaurants[i].restaurant.name}</h3>
-        <a href='${responseJson.restaurants[i].restaurant.url}'>${responseJson.restaurants[i].restaurant.url}</a>
-        </li>`
-        )
+        <a href='${responseJson.restaurants[i].restaurant.url}'>${responseJson.restaurants[i].restaurant.name}</a> | <a href='${responseJson.restaurants[i].restaurant.menu_url}'>Menu</a>
+        <br>
+        <br>
+        </li>`)
     };
     $("#results").removeClass("hidden");
 }
@@ -228,6 +227,8 @@ function reset() {
         inOutFilter = '';
         $('.cuisineOptions').removeClass('active');
         $('.whereToEat').removeClass('active');
+        $('.sectionContainer').show();
+        $('html, body').animate({ scrollTop: $('.cuisineSelection').offset().top }, 500);
     })
 }
 
@@ -236,13 +237,15 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         let city = $('#city').val();
+        $('.sectionContainer').hide();
+        $('.results-page').show();
         gatherActive();
         determineSearch(selectionArr, inOutFilter, city);
     })
 }
 
 // all the necessary function calls for functions with event listeners. 
-$(carousel()); 
+$(carousel());
 $(selectCuisine());
 $(whereToEat());
 $(watchForm());
