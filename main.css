@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0 auto;
+    padding: 0;
 }
 
 body {
@@ -211,14 +212,29 @@ div.whereToEat {
 
 /* RESULTS STYLES */
 
-
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
 ul {
     list-style-type: none;
 }
+
+.rest-results {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+
+/* come back to thissss...... 
+
+.video-results img {
+    margin-left: auto;
+    margin-right: auto;
+}*/
 
 
 /* MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES */
