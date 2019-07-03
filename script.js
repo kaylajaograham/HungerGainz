@@ -1,28 +1,65 @@
 "use strict";
 
-// HERO SLIDESHOW
-function carousel() {
-    let i;
-    let x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > x.length) { slideIndex = 1 }
-    x[slideIndex - 1].style.display = "block";
-    setTimeout(carousel, 2000);
-}
-
+// youtube API key
 const youtubeApiKey = "";
+// zomato API Key
 const zomatoApiKey = "";
 
+// youtube search API
 const youtubeSearchUrl = "https://www.googleapis.com/youtube/v3/search";
-const zomatoSearchUrl = "https://developers.zomato.com/api/v2.1/search";
+// zomato API
+const zomatoUrl = "https://developers.zomato.com/api/v2.1";
 
+// Array to store the cuisine selections
 var selectionArr = [];
+// variable to store the dining option
 var inOutFilter = '';
-var slideIndex = 0; //hero slideshow
+// hero slideshow
+var slideIndex = 0; 
 
+// Hard coded data from the Zomato endpoint. I could have used the GET API endpoint to fetch it
+// since there's only 6 options i decided to hardcode it. The nested api calls were becomeing difficult. 
+var cuisineData = [
+  {
+    id: 60,
+    cuisine: 'JAPANESE'
+  },
+  {
+    id: 1,
+    cuisine: 'AMERICAN'
+  },
+  {
+    id: 55,
+    cuisine: 'ITALIAN'
+  },
+  {
+    id: 73,
+    cuisine: 'MEXICAN'
+  },
+  {
+    id: 67,
+    cuisine: 'KOREAN'
+  },
+  {
+    id: 89,
+    cuisine: 'SPANISH'
+  }
+]
+
+// HERO SLIDESHOW
+function carousel() {
+  let i;
+  let x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > x.length) { slideIndex = 1 }
+  x[slideIndex - 1].style.display = "block";
+  setTimeout(carousel, 2000);
+}
+
+// Calls the youtube search API and gets a list of videos 
 function getYoutubeVideos(searchTerm, maxResults = 5) {
     for (let i = 0; i < searchTerm.length; i++) {
         const params = {
@@ -34,9 +71,7 @@ function getYoutubeVideos(searchTerm, maxResults = 5) {
         };
 
         let queryString = $.param(params);
-        console.log("query Stringified", queryString);
         const url = youtubeSearchUrl + "?" + queryString;
-        console.log("url", url);
 
         fetch(url).then(response => {
                 if (response.ok) {
@@ -50,40 +85,75 @@ function getYoutubeVideos(searchTerm, maxResults = 5) {
     }
 }
 
+// Adds html to display the youtube videos that were retrieved in the getYoutubeVideos function
 function displayVidResults(responseJson) {
-    console.log(responseJson);
-
     for (let i = 0; i < responseJson.items.length; i++) {
         $('.video-results').append(
             `<li>
       <h3>${responseJson.items[i].snippet.title}</h3>
       <p>${responseJson.items[i].snippet.description}</p>
-      <img src='${responseJson.items[i].snippet.thumbnails.default.url}'>
+      <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}">
+      <img src='${responseJson.items[i].snippet.thumbnails.high.url}'>
+      </a>
       </li>`
         )
     };
     $("#results").removeClass("hidden");
 }
 
-function getZomatoRest(searchTerm, zip, maxResults = 5) {
+// Gets the ID of the cuisine that was selected by the user from the hardcoded data object
+function getZomatoCuisineId(searchTerm){
+  for (let i = 0; i < cuisineData.length; i++) {
+    if(searchTerm == cuisineData[i].cuisine){
+      return cuisineData[i].id;
+    }
+  }
+}
+
+// Gets the Zomato city id from the zomato cities API 
+// and then called the getzomato restaraunt function to retrieve the list of restaurants
+function getZomatoCityId(searchTerm, city){
+  const options = {
+    headers: new Headers({
+        'user-key': zomatoApiKey
+    })
+  };
+
+  const params = {
+      q: city
+  };
+
+  let queryString = $.param(params);
+  const url = zomatoUrl + '/cities?' +queryString;
+
+  fetch(url, options).then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(response.statusText);
+      })
+      .then(responseJson => getZomatoRest(searchTerm, responseJson.location_suggestions[0].id))
+}
+
+// uses the zomato search api to find restaraunt suggestions then calls the function to display them in html
+function getZomatoRest(searchTerm, city_id, maxResults = 5) {
     for (let i = 0; i < searchTerm.length; i++) {
         const options = {
             headers: new Headers({
-                'user-key': zomatoApiKey,
-                'Content-Type': 'application/json'
+                'user-key': zomatoApiKey
             })
         };
 
         const params = {
-            entity_id: zip,
-            q: searchTerm[i],
+            entity_id: city_id,
+            entity_type: 'city',
+            cuisines: getZomatoCuisineId(searchTerm[i]),
+            radius: 16095,
             count: maxResults
         };
 
         let queryString = $.param(params);
-        console.log("query Stringified", queryString);
-        const url = zomatoSearchUrl + +queryString;
-        console.log("url", url);
+        const url = zomatoUrl + '/search?' +queryString;
 
         fetch(url, options).then(response => {
                 if (response.ok) {
@@ -97,55 +167,58 @@ function getZomatoRest(searchTerm, zip, maxResults = 5) {
     }
 }
 
+// creates html to display the restaraunt recommendations
 function displayRestResults(responseJson) {
-    console.log(responseJson);
-
-    for (let i = 0; i < responseJson.items.length; i++) {
-        $('.rest-results').append(
-            `<li>
-      <h3>${responseJson.restaurants[i].name}</h3>
-      <a href='${responseJson.restaurants[i].url}'></a>
-      </li>`
+    for (let i = 0; i < responseJson.restaurants.length; i++) {
+        $('.rest-results').append(`<li>
+        <h3>${responseJson.restaurants[i].restaurant.name}</h3>
+        <a href='${responseJson.restaurants[i].restaurant.url}'>${responseJson.restaurants[i].restaurant.url}</a>
+        </li>`
         )
     };
     $("#results").removeClass("hidden");
 }
 
+// toggles the selection highlight for the cuisines
 function selectCuisine() {
     $('.cuisineSelection').on('click', '.cuisineOptions', function(event) {
         $(event.target).toggleClass('active');
     });
 }
 
+// toggles the selection highlight for the Staying In or Going Out option
 function whereToEat() {
     $('.inOrOut').on('click', '.whereToEat', function(event) {
         inOutFilter = $(event.target).text();
         $(event.target).toggleClass('active');
-        console.log(inOutFilter);
     });
 }
 
-function determineSearch(searchTerm, inOrOut, zip) {
-    if (inOrOut == 'Cook it myself') {
+// determines which search to use
+// I split them up since if you're going out it doesn't make sense to search through youtube to find recipes
+function determineSearch(searchTerm, inOrOut, city_id) {
+    if (inOrOut == 'Home-cook') {
         //use only the youtube endpoint
         getYoutubeVideos(searchTerm);
     } else if (inOrOut == 'Show all options') {
         //use the zomato and youtube endpoint
         getYoutubeVideos(searchTerm);
-        getZomatoRest(searchTerm, zip);
+        getZomatoCityId(searchTerm, city_id);
 
     } else if (inOrOut == 'Dine out') {
         //use only the zomato endpoint
-        getZomatoRest(searchTerm, zip);
+        getZomatoCityId(searchTerm, city_id);
     };
 }
 
+// this finds all the selected cuisine options and appends them to an array to use later
 function gatherActive() {
     $('div.cuisineOptions.active').each(function() {
         selectionArr.push($(this).text());
     });
 }
 
+// empties the results section, hides results, clears selections
 function reset() {
     $('.resetButton').on('click', function() {
         $('.video-results').empty();
@@ -158,17 +231,18 @@ function reset() {
     })
 }
 
+// watches for the form submit to happen then kicks everything off
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
-        let zip = $('#zip').val();
+        let city = $('#city').val();
         gatherActive();
-        determineSearch(selectionArr, inOutFilter, zip);
-        console.log(selectionArr);
+        determineSearch(selectionArr, inOutFilter, city);
     })
 }
 
-$(carousel()); //hero carousel
+// all the necessary function calls for functions with event listeners. 
+$(carousel()); 
 $(selectCuisine());
 $(whereToEat());
 $(watchForm());

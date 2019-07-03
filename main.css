@@ -86,7 +86,7 @@ section.location {
     font-family: 'Actor', sans-serif;
 }
 
-input#zip {
+input#city {
     height: 30px;
     display: flex;
     justify-content: center;
@@ -200,6 +200,12 @@ div.whereToEat {
     background-color: rgb(180, 180, 180);
     color: white;
     border: none;
+}
+
+.submit:hover {
+    text-decoration: underline;
+    background-color: white;
+    color: black;
 }
 
 
