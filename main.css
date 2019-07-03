@@ -33,7 +33,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 900;
     z-index: 1000;
     color: black;
@@ -52,6 +52,8 @@ h2 {
     text-align: center;
     color: rgb(36, 177, 146);
     padding: 25px;
+    text-shadow: 1px 1px grey;
+    font-size: 33px;
 }
 
 .offset {
@@ -120,6 +122,36 @@ input.submit {
     justify-content: center;
 }
 
+.submit:hover {
+    text-decoration: underline;
+    background-color: white;
+    color: black;
+}
+
+input.resetButton {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    height: 40px;
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid rgb(36, 177, 146);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ICONS HOW IT WORKS */
+
+.dinnerware {
+    display: inline;
+}
+
+.videoplayer {
+    display: block;
+}
+
 
 /* FILTER STYLES */
 
@@ -170,18 +202,13 @@ div.whereToEat {
     border: none;
 }
 
-.submit:hover {
-    text-decoration: underline;
-    background-color: white;
-    color: black;
-}
-
 
 /* RESULTS STYLES */
 
-.hidden {
+
+/* .hidden {
     display: none;
-}
+} */
 
 ul {
     list-style-type: none;
