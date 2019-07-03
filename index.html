@@ -35,22 +35,37 @@
 
             <h2>YOU'RE NOT INDECISIVE</h2>
             <h3> You know exactly what you want - you just don't know what it is yet. We get it.</h3>
-            <h3>We're here to help you gain back the time you would have spent in making a decision by narrowing your options for easy selection. You're welcome.</h3>
+
+            <h3>We're here to help you gain back time you would have spent in making a decision by narrowing your options for easy selection. You're welcome.</h3>
+
+
+            <!-- making a how it works section if there's time 
+            <h2>HOW IT WORKS</h2>
+            <div id="hiwIcons" class="icons">
+                <div class="dinnerware">
+                    <img src="streamline-icon-restaurant-dishes@24x24.png" alt="dinnerware">
+                    <h4>Select a type of cuisine</h4>
+                </div>
+                <div class="videoplayer">
+                    <img src="streamline-icon-video-player-playing@24x24.png" alt="videoplayer">
+                    <h4>If you'd rather cook yourself or be served</h4>
+                </div>
+            </div>  -->
 
 
             <section class="cuisineSelection">
                 <h2 class="offset">What sounds good</h2>
 
                 <div class="col1">
-                    <div id="Japanese" class="cuisineOptions">JAPANESE</div>
-                    <div id="American" class="cuisineOptions">AMERICAN</div>
-                    <div id="Italian" class="cuisineOptions">ITALIAN</div>
+                    <div id="Japanese" class="cuisineOptions">Japanese</div>
+                    <div id="American" class="cuisineOptions">American</div>
+                    <div id="Italian" class="cuisineOptions">Italian</div>
                 </div>
 
                 <div class="col2">
-                    <div id="Mexican" class="cuisineOptions">MEXICAN</div>
-                    <div id="Korean" class="cuisineOptions">KOREAN</div>
-                    <div id="Spanish" class="cuisineOptions">SPANISH</div>
+                    <div id="Mexican" class="cuisineOptions">Mexican</div>
+                    <div id="Korean" class="cuisineOptions">Korean</div>
+                    <div id="Spanish" class="cuisineOptions">Spanish</div>
                 </div>
             </section>
 
@@ -65,6 +80,7 @@
                 <h2>Enter your city</h2>
                 <br>
                 <input id="city" name="cityName" type="type" placeholder="San Diego" required></input>
+
                 <input type="submit" class="submit"></input>
             </section>
 
@@ -72,12 +88,26 @@
 
             <!-- RESULTS SECTION -->
             <section id="results" class="hidden">
-                <h2>Results for </h2>
+                <h2>Something smells good! Here's what we've cooked up:</h2>
 
-                <ul class="rest-results"></ul>
-                <ul class="video-results"> </ul>
+                <section class="restaurantSection">
+                    <div class="restaurantChoices">
+                        <h3>We volunteer these restaurants as tribute to your hunger quest.</h3>
+                        <ul class="rest-results"></ul>
+                    </div>
+                </section>
 
-                <input type="reset" class="resetButton">RESET</input>
+                <!-- carousel https://mediatemple.net/blog/tips/carousels-dont-have-to-be-complicated/ -->
+
+                <section class="videoSection">
+                    <div class="videoChoices">
+                        <h3>Nothing's better than a home-cooked meal. Our compliments to the chef (you!).</h3>
+                        <ul class="video-results"> </ul>
+                    </div>
+                </section>
+
+                <h2>Not what you're looking for? Let's try again.</h2>
+                <input type="reset" class="resetButton"></input>
             </section>
         </form>
     </div>
