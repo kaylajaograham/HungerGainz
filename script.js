@@ -1,9 +1,9 @@
 "use strict";
 
 // youtube API key
-const youtubeApiKey = "";
+const youtubeApiKey = "AIzaSyBRLCsubEBBbxRGX6FlwL7JJeMBE3Rr3Ek";
 // zomato API Key
-const zomatoApiKey = "";
+const zomatoApiKey = "4b223ad511b1e862c1b8f52629775d00";
 
 // youtube search API
 const youtubeSearchUrl = "https://www.googleapis.com/youtube/v3/search";
