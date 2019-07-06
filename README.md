@@ -1,12 +1,19 @@
 # HungerGainz
 
-Summary: This app is created to help a user feed their hunger cravings by showing restaurants for their cuisine in their city or showing youtube videos to help them make that cuisine at home.
+Summary: It's always the daunting question...<i>What do you want to eat?</i> Hunger Gainz makes the decision process easy. We aim to feed your cravings by showing nearby restaurants for the cuisine that sound good to you or by grabbing YouTube videos to you make the dish at home. 
 
 Demo here: https://kaylajaograham.github.io/HungerGainz/
 
 # Team
 Kayla Graham  
 Crystal Ophaso (git username: cophaso)
+
+# Technology Used
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+  <li>jQuery</li>
 
 # Screenshots
 <h2>Hero Image</h2>
