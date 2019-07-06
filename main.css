@@ -152,18 +152,6 @@ input.resetButton {
 }
 
 
-/* ICONS HOW IT WORKS 
-
-.dinnerware {
-    display: inline;
-}
-
-.videoplayer {
-    display: block;
-}
-*/
-
-
 /* FILTER STYLES */
 
 div.col1 {
@@ -246,15 +234,6 @@ ul {
     justify-content: center;
     padding: 0;
 }
-
-
-/* come back to thissss...... 
-
-.video-results img {
-    margin-left: auto;
-    margin-right: auto;
-}*/
-
 
 /* MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES */
 
