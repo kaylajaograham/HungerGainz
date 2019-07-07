@@ -90,8 +90,7 @@ function displayVidResults(responseJson) {
         $('.video-results').append(
             `<li>
       <h3>${responseJson.items[i].snippet.title}</h3>
-      <!-- <p>${responseJson.items[i].snippet.description}</p> -->
-      <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}">
+      <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}" target="_blank">
       <img src='${responseJson.items[i].snippet.thumbnails.medium.url}'>
       </a>
       </li>`
@@ -170,7 +169,7 @@ function getZomatoRest(searchTerm, city_id, maxResults = 5) {
 function displayRestResults(responseJson) {
     for (let i = 0; i < responseJson.restaurants.length; i++) {
         $('.rest-results').append(`<li>
-        <a href='${responseJson.restaurants[i].restaurant.url}'>${responseJson.restaurants[i].restaurant.name}</a> | <a href='${responseJson.restaurants[i].restaurant.menu_url}'>Menu</a>
+        <a href='${responseJson.restaurants[i].restaurant.url}' target="_blank">${responseJson.restaurants[i].restaurant.name}</a> | <a href='${responseJson.restaurants[i].restaurant.menu_url}' target="_blank">Menu</a>
         <br>
         <br>
         </li>`)
