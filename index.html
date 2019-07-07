@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <main>
+    <main role="heading">
         <div class="heroSlideContainer" style="width: 100%">
 
             <div class="heroTitle">
@@ -32,7 +32,7 @@
     <!-- HOME PAGE -->
 
     <div class="sectionContainer">
-        <form>
+        <form role="form">
 
             <h2>YOU'RE NOT INDECISIVE</h2>
             <h3> You know exactly what you want - you just don't know what it is yet. We get it.</h3>
@@ -44,15 +44,15 @@
                 <h2 class="offset">What sounds good</h2>
 
                 <div class="col1">
-                    <div id="Japanese" class="cuisineOptions">Japanese</div>
-                    <div id="American" class="cuisineOptions">American</div>
-                    <div id="Italian" class="cuisineOptions">Italian</div>
+                    <div id="Japanese" class="cuisineOptions" role="switch">Japanese</div>
+                    <div id="American" class="cuisineOptions" role="switch">American</div>
+                    <div id="Italian" class="cuisineOptions" role="switch">Italian</div>
                 </div>
 
                 <div class="col2">
-                    <div id="Mexican" class="cuisineOptions">Mexican</div>
-                    <div id="Korean" class="cuisineOptions">Korean</div>
-                    <div id="Spanish" class="cuisineOptions">Spanish</div>
+                    <div id="Mexican" class="cuisineOptions" role="switch">Mexican</div>
+                    <div id="Korean" class="cuisineOptions" role="switch">Korean</div>
+                    <div id="Spanish" class="cuisineOptions" role="switch">Spanish</div>
                 </div>
             </section>
 
@@ -68,30 +68,30 @@
                 <br>
                 <input id="city" name="cityName" type="type" placeholder="San Diego" required></input>
 
-                <input type="submit" class="submit"></input>
+                <input type="submit" class="submit" role="button"></input>
             </section>
     </div>
 
 
     <!-- RESULTS SECTION -->
-    <div class="results-page">
+    <div class="results-page" aria-live="polite">
         <section id="results" class="hidden">
             <h2>Something smells good! Here's what we've cooked up:</h2>
 
             <section class="restaurantSection">
                 <div class="restaurantChoices">
-                    <ul class="rest-results"></ul>
+                    <ul class="rest-results" role="list"></ul>
                 </div>
             </section>
 
             <section class="videoSection">
                 <div class="videoChoices">
-                    <ul class="video-results"></ul>
+                    <ul class="video-results" role="list"></ul>
                 </div>
             </section>
 
             <h2>Not what you're looking for? Let's try again.</h2>
-            <input type="reset" class="resetButton"></input>
+            <input type="reset" class="resetButton" role="button"></input>
         </section>
         </form>
     </div>
