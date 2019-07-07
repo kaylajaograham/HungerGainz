@@ -187,8 +187,9 @@ function selectCuisine() {
 // toggles the selection highlight for the Staying In or Going Out option
 function whereToEat() {
     $('.inOrOut').on('click', '.whereToEat', function(event) {
+        $('.active').removeClass('active')
         inOutFilter = $(event.target).text();
-        $(event.target).toggleClass('active');
+        $(this).addClass('active');
     });
 }
 
@@ -235,13 +236,21 @@ function reset() {
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
+        gatherActive();
+        if (inOutFilter == ''){
+        alert('Please Select A Staying In or Going Out Option.')
+        }
+        else if (selectionArr.length == 0){
+        alert('Please Select A Cuisine Option.')
+        }
+        else {
         let city = $('#city').val();
         $('.sectionContainer').hide();
         $('.results-page').show();
-        gatherActive();
         determineSearch(selectionArr, inOutFilter, city);
+        }
     })
-}
+  }
 
 // all the necessary function calls for functions with event listeners. 
 $(carousel());
