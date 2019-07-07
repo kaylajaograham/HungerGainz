@@ -187,7 +187,7 @@ function selectCuisine() {
 // toggles the selection highlight for the Staying In or Going Out option
 function whereToEat() {
     $('.inOrOut').on('click', '.whereToEat', function(event) {
-        $('.active').removeClass('active')
+        $('.whereToEat.active').removeClass('active');
         inOutFilter = $(event.target).text();
         $(this).addClass('active');
     });
