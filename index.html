@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -8,13 +8,14 @@
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Actor|Mitr|Montserrat|Quattrocento+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kanit:900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://github.com/necolas/normalize.css/blob/master/normalize.css">
+    <link rel="stylesheet" type="text/html" href="https://github.com/necolas/normalize.css/blob/master/normalize.css">
+    <!-- For Favicon errors-->
+    <link rel="shortcut icon" href="#">
 </head>
 
 <body>
-    <main>
+    <main role="heading">
         <div class="heroSlideContainer" style="width: 100%">
-
             <div class="heroTitle">
                 <h1>Hunger Gainz</h1>
                 <h4>What do you want to eat?</h4>
@@ -26,41 +27,37 @@
 
             <img class="mySlides" src="https://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg" style="width:100%">
         </div>
-
     </main>
 
     <!-- HOME PAGE -->
-
-    <div class="sectionContainer">
-        <form>
-
+    <form role="form">
+        <div class="sectionContainer">
             <h2>YOU'RE NOT INDECISIVE</h2>
             <h3> You know exactly what you want - you just don't know what it is yet. We get it.</h3>
 
             <h3>We're here to help you gain back time you would have spent in making a decision by narrowing your options for easy selection. You're welcome.</h3>
 
-
             <section class="cuisineSelection">
                 <h2 class="offset">What sounds good</h2>
 
                 <div class="col1">
-                    <div id="Japanese" class="cuisineOptions">Japanese</div>
-                    <div id="American" class="cuisineOptions">American</div>
-                    <div id="Italian" class="cuisineOptions">Italian</div>
+                    <div id="Japanese" class="cuisineOptions" role="switch">Japanese</div>
+                    <div id="American" class="cuisineOptions" role="switch">American</div>
+                    <div id="Italian" class="cuisineOptions" role="switch">Italian</div>
                 </div>
 
                 <div class="col2">
-                    <div id="Mexican" class="cuisineOptions">Mexican</div>
-                    <div id="Korean" class="cuisineOptions">Korean</div>
-                    <div id="Spanish" class="cuisineOptions">Spanish</div>
+                    <div id="Mexican" class="cuisineOptions" role="switch">Mexican</div>
+                    <div id="Korean" class="cuisineOptions" role="switch">Korean</div>
+                    <div id="Spanish" class="cuisineOptions" role="switch">Spanish</div>
                 </div>
             </section>
 
             <section class="inOrOut">
                 <h2>Staying In or Going Out</h2>
-                <div id="stayIn" class="whereToEat">Home-cook</div>
-                <div id="goOut" class="whereToEat">Dine out</div>
-                <div id="showAll" class="whereToEat">Show all options</div>
+                <div id="stayIn" class="whereToEat" role="switch">Home-cook</div>
+                <div id="goOut" class="whereToEat" role="switch">Dine out</div>
+                <div id="showAll" class="whereToEat" role="switch">Show all options</div>
             </section>
 
             <section class="location">
@@ -68,33 +65,40 @@
                 <br>
                 <input id="city" name="cityName" type="type" placeholder="San Diego" required></input>
 
-                <input type="submit" class="submit"></input>
+                <input type="submit" class="submit" role="button"></input>
             </section>
-    </div>
+        </div>
 
 
-    <!-- RESULTS SECTION -->
-    <div class="results-page">
-        <section id="results" class="hidden">
-            <h2>Something smells good! Here's what we've cooked up:</h2>
+        <!-- RESULTS SECTION -->
+        <div class="results-page" aria-live="polite">
+            <section id="results" class="hidden">
+                <h2>Something smells good! Here's what we've cooked up:</h2>
 
-            <section class="restaurantSection">
-                <div class="restaurantChoices">
-                    <ul class="rest-results"></ul>
-                </div>
-            </section>
+                <section class="restaurantSection">
+                    <div class="restaurantChoices">
+                        <ul class="rest-results" role="list"></ul>
+                    </div>
+                </section>
+
+
+                <section class="videoSection">
+                    <div class="videoChoices">
+                        <ul class="video-results" role="list"></ul>
+                    </div>
+                </section>
+
+                <h2>Not what you're looking for? Let's try again.</h2>
+                <input type="reset" class="resetButton" role="button"></input>
 
             <section class="videoSection">
                 <div class="videoChoices">
                     <ul class="video-results"></ul>
                 </div>
             </section>
+        </div>
+    </form>
 
-            <h2>Not what you're looking for? Let's try again.</h2>
-            <input type="reset" class="resetButton"></input>
-        </section>
-        </form>
-    </div>
 
     <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
